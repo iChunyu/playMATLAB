@@ -1,2 +1,2 @@
-# playMATLAB
-无聊时候就玩MATLAB来找乐子吧~
+# MATLAB乐子库
+这个仓库旨在利用MATLAB找乐子玩，上班时间请勿克隆。
