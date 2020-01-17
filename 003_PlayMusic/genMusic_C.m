@@ -3,7 +3,7 @@
 %        fs --- sampling frequency, default: 44100 Hz
 %        Tb --- time of one beat, default: 1 s
 
-% XiaoCY 2020-01-12
+% XiaoCY 2020-01-17
 
 %%
 function msc = genMusic_C(varargin)
@@ -23,46 +23,50 @@ function msc = genMusic_C(varargin)
         otherwise
             error('Invalid input')
     end
-
+    
     [N,~] = size(rythm);
     msc0 = cell(1,N);
+    f = 440*2.^(((1:88)-49)/12)';
     
     for k = 1:N
+        tidx = rythm(k,1);  % tone index
         t = 0:1/fs:rythm(k,2)*Tb;
-        win = 1-t/t(end);
         
-        switch rythm(k,1)
-            case 0
-                msc0{k} = t*0;
-                
-            case {1 2 3 4 5 6 7}
-                fidx = rythm(k,1);
-                f = [261.6256  293.6648  329.6276  349.2282  391.9954  440.0000  493.8833];
-                msc0{k} = simPiano(f(fidx),t,win);
-                
-            case {11 12 13 14 15 16 17}
-                fidx = rythm(k,1)-10;
-                f = [523.2500  587.3300  659.2600  698.4600  783.9900  880.0000  987.7700];
-                msc0{k} = simPiano(f(fidx),t,win);
-                
-            case {21 22 23 24 25 26 27}
-                fidx = rythm(k,1)-20;
-                f = [1.0465    1.1747    1.3185    1.3969    1.5680    1.7600    1.9755]*1e3;
-                msc0{k} = simPiano(f(fidx),t,win);
-                
-            case {-11 -12 -13 -14 -15 -16 -17}
-                fidx = abs(rythm(k,1)+10);
-                f = [130.8100  146.8300  164.8100  174.6100  196.0000  220.0000  246.9400];
-                msc0{k} = simPiano(f(fidx),t,win);
-                
-            case {-21 -22 -23 -24 -25 -26 -27}
-                fidx = abs(rythm(k,1)+20);
-                f = [65.4060   73.4160   82.4070   87.3070   97.9990  110.0000  123.4700];
-                msc0{k} = simPiano(f(fidx),t,win);
-                
-            otherwise
-                msc0{k} = [];
+        
+        if tidx == 0
+            msc0{k} = t*0;
+            continue
         end
+        
+        up = 0;
+        if mod(tidx,10) == 0
+            up = 1;
+            tidx = fix(tidx/10);
+        end
+        
+        n = fix(tidx/10);
+        tone = abs(tidx-10*n);
+        switch tone
+            case 1
+                fidx = 12*n+up+40;
+            case 2
+                fidx = 12*n+up+42;
+            case 3
+                fidx = 12*n+44;
+            case 4
+                fidx = 12*n+up+45;
+            case 5
+                fidx = 12*n+up+47;
+            case 6
+                fidx = 12*n+up+49;
+            case 7
+                fidx = 12*n+51;
+            otherwise
+                error('Invalid rythm')
+        end
+        
+        win = 1-t/t(end);
+        msc0{k} = simPiano(f(fidx),t,win);
     end
     
     msc = reshape([msc0{:}],[],1);
