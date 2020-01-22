@@ -31,8 +31,7 @@ function msc = genMusic_C(varargin)
     for k = 1:N
         tidx = rythm(k,1);  % tone index
         t = 0:1/fs:rythm(k,2)*Tb;
-        
-        
+                
         if tidx == 0
             msc0{k} = t*0;
             continue
@@ -65,21 +64,18 @@ function msc = genMusic_C(varargin)
                 error('Invalid rythm')
         end
         
-        win = 1-t/t(end);
-        msc0{k} = simPiano(f(fidx),t,win);
+        msc0{k} = simPiano(f(fidx),t);
     end
     
     msc = reshape([msc0{:}],[],1);
 end
 
-function y = simPiano(f,t,win)
-    y = (sin(f*2*pi*t) + ...
-        0.0600*sin(f*4*pi*t) + ...
-        0.0237*sin(f*6*pi*t) + ...
-        0.0163*sin(f*8*pi*t) + ...
-        0.0142*sin(f*10*pi*t) + ...
-        0.0025*sin(f*12*pi*t) + ...
-        0.0080*sin(f*14*pi*t) + ...
-        0.0028*sin(f*16*pi*t) +...
-        0.0060*sin(f*18*pi*t) ).*win;
+function y = simPiano(f,t)
+    A = 0.05;
+    D = 0.9;
+    S = 0.0001;
+    R = 0.05;
+    
+    y = sin(2*pi*f*t);
+    y = ADSR(A,D,S,R,y,t);
 end
