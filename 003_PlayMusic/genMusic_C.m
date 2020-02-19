@@ -3,7 +3,7 @@
 %        fs --- sampling frequency, default: 44100 Hz
 %        Tb --- time of one beat, default: 1 s
 
-% XiaoCY 2020-01-17
+% XiaoCY 2020-02-19
 
 %%
 function msc = genMusic_C(varargin)
@@ -71,11 +71,15 @@ function msc = genMusic_C(varargin)
 end
 
 function y = simPiano(f,t)
-    A = 0.05;
-    D = 0.9;
-    S = 0.0001;
-    R = 0.05;
+    A = 0.01;
+    D = 0.98;
+    S = 0.05;
+    R = 0.01;
     
-    y = sin(2*pi*f*t);
+    y = 1/4*sin(2*pi*f*t) ...
+        +sqrt(3)/2*cos(2*pi*f*t) ...
+        -1/4*sin(2*pi*3*f*t);
+    % https://dsp.stackexchange.com/questions/46598/
+    %     mathematical-equation-for-the-sound-wave-that-a-piano-makes
     y = ADSR(A,D,S,R,y,t);
 end
