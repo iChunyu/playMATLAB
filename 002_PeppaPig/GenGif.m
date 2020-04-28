@@ -1,7 +1,7 @@
 clear
 clc
 
-str = '?????';
+str = '新年快乐！';
 filename = 'PeppaYear.gif';
 h = iPeppa();
 for i = 0:5
@@ -17,8 +17,6 @@ for i = 0:5
     if i == 0
         imwrite(imind,cm,filename,'gif', 'Loopcount',inf);
     else
-        imwrite(imind,cm,filename,'gif','WriteMode','append');
+        imwrite(imind,cm,filename,'gif','WriteMode','append','DelayTime',0.4);
     end
-    
-    pause(0.4)
 end

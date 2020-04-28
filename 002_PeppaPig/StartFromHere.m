@@ -2,7 +2,7 @@ close all
 clear
 clc
 
-str = 'ĞÂÄê¿ìÀÖ£¡';
+str = 'æ–°å¹´å¿«ä¹ï¼';
 h = iPeppa();
 for i = 0:5
     h = iNewYear(h,i);

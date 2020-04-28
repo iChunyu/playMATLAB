@@ -30,7 +30,7 @@ function msc = genMusic_C(varargin)
     
     for k = 1:N
         tidx = rythm(k,1);  % tone index
-        t = 0:1/fs:rythm(k,2)*Tb;
+        t = 1/fs:1/fs:rythm(k,2)*Tb;
                 
         if tidx == 0
             msc0{k} = t*0;

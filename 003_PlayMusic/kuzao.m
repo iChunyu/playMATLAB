@@ -90,4 +90,5 @@ L = [
 %%
 Rmsc = genMusic_C(R,fs,Tb);
 Lmsc = genMusic_C(L,fs,Tb);
-sound([Lmsc,Rmsc(1:length(Lmsc))],fs)
+sound(Rmsc,fs)
+% sound(Lmsc,fs)
