@@ -7,6 +7,12 @@
 clear;clc
 close all
 
+
+V = VideoWriter('Earth');
+V.FrameRate = 60;
+V.Quality = 90;
+open(V)
+
 %% Earth
 Cdata = imread('World-Political-Map-HD-Wallpaper-21.jpg');
 for k = 1:3
@@ -35,7 +41,7 @@ R = [ 1 0 0;
     0 cos(inc) -sin(inc);
     0 sin(inc) cos(inc)];
 
-for day = 0:360
+for day = 0:2:366
     rotate(earth,[0,0,1],10);
     
     theta = day/365*2*pi;
@@ -55,5 +61,8 @@ for day = 0:360
     
     h = light('position',r);
     
-    pause(0.02)
+    frame = getframe(gcf);
+    writeVideo(V,frame);
 end
+
+close(V)
