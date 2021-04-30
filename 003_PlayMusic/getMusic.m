@@ -1,5 +1,5 @@
-% msc = genMusic(rythm,fs,Tb) generates music in C with given rythm
-%     rythm --- consists of index of tone and beat in tow columns
+% msc = genMusic(rhythm,fs,Tb) generates music in C with given rythm
+%     rhythm --- consists of index of tone and beat in tow columns
 %     fs --- sampling frequency, default: 44100 Hz
 %     Tb --- time of one beat, default: 3 s
 
