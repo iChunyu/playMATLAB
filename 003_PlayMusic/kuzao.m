@@ -3,7 +3,7 @@
 clear;clc
 
 fs = 44100;
-Tb = 60/66;
+Tb = 3;
 
 %%
 R = [
@@ -88,7 +88,10 @@ L = [
 ];
 
 %%
-Rmsc = genMusic_C(R,fs,Tb);
-Lmsc = genMusic_C(L,fs,Tb);
+Rmsc = getMusic(R,fs,Tb);
+Lmsc = getMusic(L,fs,Tb);
+
+% sound([Rmsc Lmsc], fs)
+
 sound(Rmsc,fs)
-% sound(Lmsc,fs)
+sound(Lmsc,fs)
