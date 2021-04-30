@@ -1,12 +1,18 @@
-% Beautiful partner
+% `Beautiful partner' (maybe it's the name in English)
+% (Mei Li Da Dang)
 
-clear;clc
+% Sheet music from `https://www.bilibili.com/video/BV1y4411o7EN'
 
-fs = 44100;
-Tb = 3;
+% XiaoCY, updated on 2021-04-30
 
 %%
-R = [
+clear;clc
+
+fs = 44100;             % Sampling frequency (Hz)
+Tb = 3;                 % Duration time of eath tone
+
+%%
+main = [
     6	0.5
     13	0.5
     6	0.5
@@ -67,31 +73,31 @@ R = [
     6	1.5
     ];
 
-L = [
+minor = [
     0	0.5
--16	2	
--17	2	
--14	2	
--13	2	
--14	2	
--15	2	
-1	2	
--13	2	
--14	2	
--12	2
--15	2	
-1	2	
--14	2   	
--12	2   	
--17	2
--16	1.5
-];
+    -16	2
+    -17	2
+    -14	2
+    -13	2
+    -14	2
+    -15	2
+    1	2
+    -13	2
+    -14	2
+    -12	2
+    -15	2
+    1	2
+    -14	2
+    -12	2
+    -17	2
+    -16	1.5
+    ];
 
 %%
-Rmsc = getMusic(R,fs,Tb);
-Lmsc = getMusic(L,fs,Tb);
+main_msc = getMusic(main,fs,Tb);
+minor_msc = getMusic(minor,fs,Tb);
 
-% sound([Rmsc Lmsc], fs)
+% sound([main_msc minor_msc], fs)
 
-sound(Rmsc,fs)
-sound(Lmsc,fs)
+sound(main_msc,fs)
+sound(minor_msc,fs)

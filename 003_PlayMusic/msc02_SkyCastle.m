@@ -1,12 +1,17 @@
 % Castle in the Sky
+% (No accompany)
 
-clear;clc
 
-fs = 44100;
-Tb = 0.5;
+% XiaoCY 2021-04-30
 
 %%
-rythm = [
+clear;clc
+
+fs = 44100;                 % Sampling frequency (Hz)
+Tb = 3;                     % Duration time of eath tone
+
+%%
+rhythm = [
     6	0.5
     7	0.5
     11	1.5
@@ -145,6 +150,8 @@ rythm = [
     6	4
     ];
 
+rhythm(:,2) = rhythm(:,2) *0.6;         % Speed up
+
 %%
-msc = genMusic_C(rythm,fs,Tb);
+msc = getMusic(rhythm,fs,Tb);
 sound(msc,fs)

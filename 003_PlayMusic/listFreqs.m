@@ -11,10 +11,10 @@ tone = [ -21 -210 -22 -220 -23 -24 -240 -25 -250 -26 -260 -27 ...
     11  110 12  120 13  14  140 15  150 16  160 17 ...
     21  210 22  220 23  24  240 25  250 26  260 27 ]';
 
-[ftone,fid] = tone2freqs(tone);
+[ftone,fid] = getFreqs(tone);
 
 clc
-fprintf('%6s%6s%14s\n','Tone','Key','Frequency')
+fprintf('%6s%6s%13s\n','Tone','Key','Frequency')
 for k = 1:length(tone)
-    fprintf('%6d%6d%10.2f (Hz)\n',tone(k),fid(k),ftone(k))
+    fprintf('%6d%6d%10.2f Hz\n',tone(k),fid(k),ftone(k))
 end
