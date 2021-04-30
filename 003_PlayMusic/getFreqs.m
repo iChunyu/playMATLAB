@@ -1,4 +1,4 @@
-% [ftone, fid] = tone2freqs(tone) calculates frequency of the given tone index
+% [ftone, fid] = getFreqs(tone) calculates frequency of the given tone index
 %   tone --- tone index given below
 %          tone = 1~7 represents do,re,mi...xi;
 %          tone = n0 ...(ends with 0) means rising tone of n;
@@ -11,7 +11,7 @@
 % XiaoCY 2021-04-30
 
 %%
-function varargout = tone2freqs(tone)
+function varargout = getFreqs(tone)
     
     K = length(tone);
     ftone = nan(K,1);
